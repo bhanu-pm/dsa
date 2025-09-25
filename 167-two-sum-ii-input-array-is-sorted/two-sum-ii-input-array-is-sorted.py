@@ -9,7 +9,7 @@ class Solution:
             
             if total < target:
                 i += 1
-            elif total > target:
+            else:
                 j -= 1
 
             if i == j:
