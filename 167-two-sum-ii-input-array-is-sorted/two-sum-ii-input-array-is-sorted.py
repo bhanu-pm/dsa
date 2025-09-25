@@ -11,6 +11,3 @@ class Solution:
                 i += 1
             else:
                 j -= 1
-
-            if i == j:
-                return [-1, -1]
