@@ -1,14 +1,16 @@
 import re
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        lower = s.lower()
+        s = s.lower()
         i = 0
-        j = len(lower) - 1
+        j = len(s) - 1
 
         while i < j:
-            if lower[i].isalnum():
-                if lower[j].isalnum():
-                    if lower[i] == lower[j]:
+            i_char = s[i]
+            j_char = s[j]
+            if i_char.isalnum():
+                if j_char.isalnum():
+                    if i_char == j_char:
                         i += 1
                         j -= 1
                         pass
