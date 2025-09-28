@@ -16,5 +16,6 @@ class Solution:
                 j -= 1
             else:
                 i += 1
+                j -= 1
         
         return max_area
