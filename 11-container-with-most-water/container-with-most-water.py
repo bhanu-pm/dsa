@@ -4,13 +4,15 @@ class Solution:
         j = len(height) - 1
         max_area = 0
         while i < j:
-            area = (j-i) * min([height[i], height[j]])
+            i_height = height[i]
+            j_height = height[j]
+            area = (j-i) * min([i_height, j_height])
             if area > max_area:
                 max_area = area
             
-            if height[i] < height[j]:
+            if i_height < j_height:
                 i += 1
-            elif height[i] > height[j]:
+            elif i_height > j_height:
                 j -= 1
             else:
                 i += 1
