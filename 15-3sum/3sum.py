@@ -17,7 +17,7 @@ class Solution:
                     i += 1
                     continue
                 
-                if (j < len(nums) - 1) and (nums[j] == nums[j+1]):
+                if (j < length - 1) and (nums[j] == nums[j+1]):
                     j -= 1
                     continue
                 
