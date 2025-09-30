@@ -1,30 +1,34 @@
-from typing import List
-
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        final = []
-        length = len(nums)
+        output = []
 
         for idx, element in enumerate(nums):
-            if idx > 0 and element == nums[idx - 1]:
-                continue
+            i = idx + 1
+            j = len(nums) - 1
 
-            i, j = idx + 1, length - 1
+            if (idx > 0) and (element == nums[idx-1]):
+                continue
+            target = -element
+
             while i < j:
-                three_sum = element + nums[i] + nums[j]
-                if three_sum < 0:
+                if (i > idx + 1) and (nums[i] == nums[i-1]):
                     i += 1
-                elif three_sum > 0:
+                    continue
+
+                if (j < len(nums) - 1) and (nums[j] == nums[j+1]):
                     j -= 1
+                    continue
+                
+                summ = nums[i] + nums[j]
+
+                if summ == target:
+                    output.append([element, nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                elif summ < target:
+                    i += 1
                 else:
-                    final.append([element, nums[i], nums[j]])
-                    i += 1
                     j -= 1
-                    
-                    while i < j and nums[i] == nums[i - 1]:
-                        i += 1
-                    while i < j and nums[j] == nums[j + 1]:
-                        j -= 1
-        
-        return final
+            
+        return output
