@@ -17,17 +17,14 @@ class Solution:
                     i += 1
                     continue
                 
-                
-
                 if (j < len(nums) - 1) and (nums[j] == nums[j+1]):
                     j -= 1
                     continue
                 
-                element_i, element_j = nums[i], nums[j]
-                summ = element_i + element_j
+                summ = nums[i] + nums[j]
 
                 if summ == target:
-                    output.append([element, element_i, element_j])
+                    output.append([element, nums[i], nums[j]])
                     i += 1
                     j -= 1
                 elif summ < target:
