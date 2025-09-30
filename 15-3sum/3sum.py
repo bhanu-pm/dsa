@@ -8,9 +8,7 @@ class Solution:
             if (idx > 0) and (element == nums[idx-1]):
                 continue
 
-            i = idx + 1
-            j = length - 1
-
+            i, j = idx + 1, length - 1
             while i < j:
                 summ = element + nums[i] + nums[j]
                 if summ == 0:
