@@ -5,12 +5,11 @@ class Solution:
         length = len(nums)
 
         for idx, element in enumerate(nums):
-            i = idx + 1
-            j = length - 1
-
             if (idx > 0) and (element == nums[idx-1]):
                 continue
-            target = -element
+
+            i = idx + 1
+            j = length - 1
 
             while i < j:
                 if (i > idx + 1) and (nums[i] == nums[i-1]):
@@ -21,13 +20,13 @@ class Solution:
                     j -= 1
                     continue
                 
-                summ = nums[i] + nums[j]
+                summ = element + nums[i] + nums[j]
 
-                if summ == target:
+                if summ == 0:
                     output.append([element, nums[i], nums[j]])
                     i += 1
                     j -= 1
-                elif summ < target:
+                elif summ < 0:
                     i += 1
                 else:
                     j -= 1
