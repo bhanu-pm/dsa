@@ -11,7 +11,11 @@ class Solution:
             i, j = idx + 1, length - 1
             while i < j:
                 summ = element + nums[i] + nums[j]
-                if summ == 0:
+                if summ < 0:
+                    i += 1
+                elif summ > 0:
+                    j -= 1
+                else:
                     output.append([element, nums[i], nums[j]])
                     i += 1
                     j -= 1
@@ -20,10 +24,5 @@ class Solution:
                         i += 1
                     while (i < j) and (nums[j] == nums[j+1]):
                         j -= 1
-
-                elif summ < 0:
-                    i += 1
-                else:
-                    j -= 1
             
         return output
