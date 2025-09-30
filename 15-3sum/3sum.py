@@ -17,13 +17,13 @@ class Solution:
                     i += 1
                     continue
                 
-                element_i = nums[i]
+                
 
                 if (j < len(nums) - 1) and (nums[j] == nums[j+1]):
                     j -= 1
                     continue
                 
-                element_j = nums[j]
+                element_i, element_j = nums[i], nums[j]
                 summ = element_i + element_j
 
                 if summ == target:
