@@ -5,8 +5,8 @@ func maxBottlesDrunk(numBottles int, numExchange int) int {
     for {
         if emptyBottles >= numExchange {
             emptyBottles -= numExchange
-            numBottles += 1
-            numExchange += 1
+            numBottles++
+            numExchange++
         } else if numBottles > 0 {
             bottlesDrunk += numBottles
             emptyBottles += numBottles
