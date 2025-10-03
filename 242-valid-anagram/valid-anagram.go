@@ -3,20 +3,16 @@ func isAnagram(s string, t string) bool {
         return false
     }
 
-    seenS := make(map[rune]int)
-    seenT := make(map[rune]int)
+    seen := make(map[rune]int)
 
     for _, letter := range s {
-        seenS[letter]++
+        seen[letter]++
     }
     for _, letter := range t {
-        seenT[letter]++
-    }
-
-    for letter, num := range seenS {
-        if seenT[letter] != num {
+        if seen[letter] == 0 {
             return false
         }
+        seen[letter]--
     }
     return true
 }
