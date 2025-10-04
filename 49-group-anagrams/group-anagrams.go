@@ -1,5 +1,3 @@
-import "sort"
-
 func groupAnagrams(strs []string) [][]string {
     result := [][]string{}
     if len(strs) < 2 {
@@ -7,14 +5,13 @@ func groupAnagrams(strs []string) [][]string {
         return result
     }
 
-    sortedStrs := make(map[string][]string)
+    sortedStrs := make(map[[26]int][]string)
     for _, str := range strs {
-        runes := []rune(str)
-        sort.Slice(runes, func(i, j int) bool {
-            return runes[i] < runes[j]
-        })
-        sorted := string(runes)
-        sortedStrs[sorted] = append(sortedStrs[sorted], str)
+        key := [26]int{}
+        for _, letter := range str {
+            key[letter-'a']++
+        }
+        sortedStrs[key] = append(sortedStrs[key], str)
     }
 
     for _, value := range sortedStrs {
