@@ -30,9 +30,9 @@ func groupAnagrams(strs []string) [][]string {
         group = append(group, str)
 
         for j:=0; j<len(strs); j++ {
-            if doneIdx[j] {
-                continue
-            }
+            // if doneIdx[j] {
+            //     continue
+            // }
             if i == j {
                 continue
             }
