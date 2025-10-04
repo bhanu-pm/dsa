@@ -26,6 +26,9 @@ func groupAnagrams(strs []string) [][]string {
         str2Loop:
         for j:=0; j<len(strs); j++ {
             str2 := strs[j]
+            // if doneIdx[j]{
+            //     continue
+            // }
             if i == j {
                 continue
             }
