@@ -5,7 +5,7 @@ func topKFrequent(nums []int, k int) []int {
 
     counts := make(map[int]int)
     reverse_counts := make(map[int][]int)
-    result := []int{}
+    result := make([]int, 0, k)
     for _, num := range nums {
         counts[num]++
     }
