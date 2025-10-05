@@ -15,19 +15,11 @@ func topKFrequent(nums []int, k int) []int {
     }
 
     i := len(nums)
-    j := 0
     for len(result) < k {
         if list, ok := reverse_counts[i]; ok {
-            if j < len(list) {
-                result = append(result, list[j])
-                j++
-            } else {
-                j=0
-                i--
-            }
-        } else {
-            i--
+            result = append(result, list...)
         }
+        i--
     }
     return result
 }
