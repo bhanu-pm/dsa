@@ -3,30 +3,27 @@ func trap(height []int) int {
         return 0
     }
 
-    left_max := 0
-    right_max := 0
-    left := 0
-    right := len(height) - 1
     total := 0
+    i := 0
+    j := len(height) - 1
+    leftmax := 0
+    rightmax := 0
 
-    for left <= right {
-        lh := height[left]
-        rh := height[right]
-
-        if lh < rh {
-            if left_max > lh {
-                total += left_max - lh
+    for i<j {
+        if height[i] > height[j] {
+            if height[j] >= rightmax {
+                rightmax = height[j]
             } else {
-                left_max = lh
+                total += rightmax - height[j]
             }
-            left++
+            j--
         } else {
-            if right_max > rh {
-                total += right_max - rh
+            if height[i] >= leftmax {
+                leftmax = height[i]
             } else {
-                right_max = rh
+                total += leftmax - height[i]
             }
-            right--
+            i++
         }
     }
     return total
