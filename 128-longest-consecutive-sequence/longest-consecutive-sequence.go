@@ -1,31 +1,35 @@
 func longestConsecutive(nums []int) int {
-    dict := make(map[int]bool)
-    engine := make([]int, 0, len(nums))
-    longest := 0
-    sequence := 0
-
-    for _, i := range nums {
-        dict[i] = true
-    }
-    
-    for key, _ := range dict {
-        if _, ok := dict[key-1]; !ok {
-            engine = append(engine, key)
-        }
+    // Put all numbers on our "magic table" for O(1) lookups.
+    // This is O(n).
+    numSet := make(map[int]bool)
+    for _, num := range nums {
+        numSet[num] = true
     }
 
-    for _, eng := range engine {
-        sequence = 1
-        for i:=1; i<=len(nums); i++ {
-            if _, ok := dict[eng+i]; ok {
-                sequence++
-            } else {
-                break
+    longestStreak := 0
+
+    // O(n) pass to check each number.
+    for num := range numSet {
+        // IMPORTANT: Is this number the start of a sequence ("engine")?
+        // We only check if the number just before it is NOT in the set.
+        if !numSet[num-1] {
+            currentNum := num
+            currentStreak := 1
+
+            // This inner loop only runs for numbers that are part of a sequence,
+            // and since we start from an engine, each number is only ever
+            // visited once here across the entire execution.
+            for numSet[currentNum+1] {
+                currentNum++
+                currentStreak++
+            }
+
+            // Update the longest streak found so far.
+            if currentStreak > longestStreak {
+                longestStreak = currentStreak
             }
         }
-        if sequence > longest {
-            longest = sequence
-        }
     }
-    return longest
+
+    return longestStreak
 }
