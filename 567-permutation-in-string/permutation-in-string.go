@@ -7,9 +7,9 @@ func checkInclusion(s1 string, s2 string) bool {
     j := len(s1)-1
     for a := range s1 {
         dict[s1[a]]++
-    }
-    for b := range s2[0:j] {
-        dict2[s2[b]]++
+        if a>0 {
+            dict2[s2[a-1]]++
+        }
     }
     for i:=0; j<len(s2); i++ {
         dict2[s2[j]]++
