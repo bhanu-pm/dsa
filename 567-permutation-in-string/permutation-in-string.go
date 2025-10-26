@@ -2,25 +2,26 @@ func checkInclusion(s1 string, s2 string) bool {
     if len(s1) > len(s2) {
         return false
     }
-    dict := make(map[byte]int, len(s1))
-    dict2 := make(map[byte]int, len(s2))
-    j := len(s1)-1
-
-    dict[s1[0]]++
-    for a:=1; a<len(s1); a++ {
-        dict[s1[a]]++
-        dict2[s2[a-1]]++
+    dict1 := make(map[byte]int)
+    dict2 := make(map[byte]int)
+    i:=0
+    for b := range s1 {
+        dict1[s1[b]]++
     }
-    for i:=0; j<len(s2); i++ {
+    for a:=0; a<len(s1)-1; a++ {
+        dict2[s2[a]]++
+    }
+
+    for j:=len(s1)-1; j<len(s2); j++ {
         dict2[s2[j]]++
-        if maps.Equal(dict, dict2) {
+        if maps.Equal(dict1, dict2) {
             return true
         }
         dict2[s2[i]]--
         if dict2[s2[i]] == 0 {
             delete(dict2, s2[i])
         }
-        j++
+        i++
     }
     return false
 }
