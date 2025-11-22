@@ -17,7 +17,4 @@ class Solution:
                 else:
                     seen_consonant = True
         
-        if seen_vowel and seen_consonant:
-            return True
-        else:
-            return False
+        return seen_vowel and seen_consonant
