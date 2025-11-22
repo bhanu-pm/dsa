@@ -1,8 +1,12 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # key: complement -> value: index
+        hash = {}
         for i in range(len(nums)):
-            for j in range(i+1, len(nums)):
-                total = nums[i] + nums[j]
-                if total == target:
-                    return [i, j]
+            complement = target - nums[i]
+            if complement in hash:
+                return [i, hash[complement]]
+            
+            # key: current num -> value: i
+            hash[nums[i]] = i
         return [-1, -1]
