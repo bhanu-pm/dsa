@@ -12,4 +12,4 @@ class Solution:
         if root.val == val:
             return root
         
-        return (self.searchBST(root.left, val)) or (self.searchBST(root.right, val))
+        return (self.searchBST(root.right, val)) or (self.searchBST(root.left, val))
