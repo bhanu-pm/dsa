@@ -9,8 +9,10 @@ class Solution:
         if root is None:
             return root
         
-        self.invertTree(root.left)
-        self.invertTree(root.right)
+        if root.left is not None:
+            self.invertTree(root.left)
+        if root.right is not None:
+            self.invertTree(root.right)
 
         root.left, root.right = root.right, root.left
         return root
