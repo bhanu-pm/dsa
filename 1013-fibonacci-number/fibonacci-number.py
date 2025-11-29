@@ -9,4 +9,5 @@ class Solution:
             return self.mem[n]
         
         fn = self.fib(n-1) + self.fib(n-2)
+        self.mem.append(fn)
         return fn
