@@ -5,6 +5,8 @@
 from collections import deque
 class Solution:
     def isValid(self, s: str) -> bool:
+        if len(s) % 2 != 0:
+            return False
         closed = {"}":"{", ")":"(", "]":"["}
         stack = deque()
         for i in s:
