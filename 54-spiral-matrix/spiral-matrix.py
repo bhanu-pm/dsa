@@ -1,21 +1,3 @@
-#  - stopping conditions
-#     - if we reach the end of the row or column
-#     - if we reach a row or column we already went through
-#  - clockwise spiral
-#     - row 0 co min row
-#     - col n co max col
-#     - row m ro max row
-#     - col 0 ro min col
-
-#     - row 1     co
-#     - col n-1   co
-#     - row m-1   ro
-#     - col 1     ro
-
-#  - are all the numbers in matrix unique?
-#     - I want to check if we already added that number
-#     - didn't mention anything, so that is not the direction
-
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         if len(matrix) == 0:
@@ -23,7 +5,6 @@ class Solution:
         if len(matrix) == 1:
             return matrix[0]
 
-        # check = {"min_row":False, "max_col":False, "max_row":False, "min_col":False}
         seen = set() # set of tuple ( i, j )
         output = []
         total_len = len(matrix[0]) * len(matrix)
