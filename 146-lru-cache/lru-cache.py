@@ -4,8 +4,7 @@
         # dll maintains the order of usage
             # both get and put methods update the order of usage in DLL
 
-# Only gets return the value
-    # if item exists, return the 'get' value
+# Only gets return the value if item exists
     # else, return -1
     # put returns null
 
@@ -23,19 +22,16 @@ class LRUCache:
         return -1
 
     def put(self, key: int, value: int) -> None:
-        # Updating a value
-        if key in self.cache:
+        if key in self.cache:                       # Updating existing cache
             self.cache[key] = value
             self.cache.move_to_end(key, last=False)
             return
-            
-        if len(self.cache) == self.capacity:
+
+        if len(self.cache) == self.capacity:        # Writing new cache
             self.cache.popitem(last=True)
         self.cache[key] = value
         self.cache.move_to_end(key, last=False)
-        # print(self.cache)
         return
-
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
