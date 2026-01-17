@@ -15,9 +15,9 @@ class Solution:
             if prices[sell] < current_min:
                 current_min = prices[sell]
                 buy = sell
-                current_max = float('-inf')
+                # current_max = float('-inf')
             elif prices[sell] > current_max:
                 current_max = prices[sell]
-                max_diff = max(max_diff, prices[sell]-prices[buy])
+            max_diff = max(max_diff, prices[sell]-prices[buy])
             sell+=1
         return max_diff
