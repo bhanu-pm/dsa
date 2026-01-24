@@ -1,17 +1,23 @@
-# two pointers buy and sell
-    # simply buy = lowest seen so far
-    # sell = highest seen after buy
-# return diff
-
+# two pointers, dynamic
+# track max price diff
+# track least price val
+# loop
+    # check if the current pointer val is less than least price
+        # if yes, this is the new buy
+        # update least price
+    # calc, price diff and update the max price diff accordingly
+# return max diff
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        max_diff = 0
         buy = 0
-        sell = 0
-        while sell < len(prices):
-            if prices[sell] < prices[buy]:
+        least_price = float('inf')
+        max_diff = float('-inf')
+
+        for sell in range(len(prices)):
+            if prices[sell] < least_price:
+                least_price = prices[sell]
                 buy = sell
             max_diff = max(max_diff, prices[sell]-prices[buy])
-            sell+=1
+        
         return max_diff
