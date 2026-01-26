@@ -17,15 +17,11 @@ class Solution:
         left = 0
 
         for right in range(len(s)):
-            if s[right] in exist:
-                exist[s[right]] += 1
-            else:
-                exist[s[right]] = 1
-            
-            while max(exist.values()) > 1:
+            while s[right] in exist:
                 exist[s[left]] -= 1
+                del exist[s[left]]
                 left += 1
-            
+            exist[s[right]] = 1
             max_len = max(max_len, right-left+1)
         
         return max_len
