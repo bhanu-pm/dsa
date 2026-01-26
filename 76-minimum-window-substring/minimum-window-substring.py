@@ -21,6 +21,8 @@
 
 # return min_str
 
+# time complex, O(N*M)
+# space complex, O(N+M)
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
@@ -39,26 +41,30 @@ class Solution:
                 tcount[i] += 1
             else:
                 tcount[i] = 1
+        
+        need = len(tcount)
+        have = 0
 
         for right in range(len(s)):
             if s[right] in wcount:
                 wcount[s[right]] += 1
             else:
                 wcount[s[right]] = 1
+            
+            if s[right] in tcount:
+                if wcount[s[right]] == tcount[s[right]]:
+                    have += 1
 
-            while self.valid(wcount, tcount): # all chars of tcount should be in wcount
+            while need == have: # all chars of tcount should be in wcount
                 if min_str_len > (right-left+1):
                     min_str_len = right-left+1
                     min_str = s[left:right+1]
+                left_char = s[left]
                 wcount[s[left]] -= 1
+
+                if left_char in tcount and (wcount[left_char] < tcount[left_char]):
+                    have -= 1
                 left += 1
         
         return min_str
     
-    def valid(self, wcount: dict, tcount: dict) -> bool:
-        for i, j in tcount.items():
-            if i not in wcount:
-                return False
-            if wcount[i] < j:
-                return False
-        return True
