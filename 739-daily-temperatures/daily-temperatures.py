@@ -1,6 +1,3 @@
-# monotonically decreasing stack
-# 
-
 
 from collections import deque
 class Solution:
@@ -13,7 +10,6 @@ class Solution:
                 while stack and temperatures[i] > stack[-1][0]:
                     a, b = stack.pop()
                     output[b] = i-b
-
             stack.append((temperatures[i], i))
 
         return output
