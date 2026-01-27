@@ -1,27 +1,44 @@
-#  - Open brackets should be closed by the same type.
-#  - correct order
-#  - every open bracket has a corresponding close brack and vice versa.
+# input is a string, w only 3 types of brackets
+# return bool, about validity of the string
+
+# stack
+# store open brackets in stack
+# if close bracket of same type as top open bracket in stack
+    # pop and its valid
+# else
+    # return invalid
+
+# dict w '{':'}', '(':')', '[':']'
+# for loop
+    # if open
+        # push into stack
+    # else
+        # if dict[stack[-1]] == current_bracket:
+            # stack pop
+            # valid
+        # else
+            # return False
+# return True
 
 from collections import deque
 class Solution:
     def isValid(self, s: str) -> bool:
-        if len(s) % 2 != 0:
-            return False
-        closed = {"}":"{", ")":"(", "]":"["}
         stack = deque()
+        brackets = {'{':'}', '(':')', '[':']'}
+
         for i in s:
-            if i in closed: # closed bracket
+            # open bracket
+            if i in brackets:
+                stack.append(i)
+            # closed
+            else:
                 if stack:
-                    openb = stack.pop()
-                    if closed[i] == openb:
+                    if brackets[stack.pop()] == i:
                         continue
                     else:
                         return False
                 else:
                     return False
-            else: # open bracket
-                stack.append(i)
         if stack:
             return False
         return True
-        
