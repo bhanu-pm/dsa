@@ -22,14 +22,12 @@ class Solution:
         for i in s:
             if i.isalnum():
                 final_list.append(i)
-        
-        f = ''.join(final_list)
 
         left = 0
-        right = len(f)-1
+        right = len(final_list)-1
 
         while left < right:
-            if f[left] != f[right]:
+            if final_list[left] != final_list[right]:
                 return False
             left += 1
             right -= 1
