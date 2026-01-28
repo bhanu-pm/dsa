@@ -1,24 +1,37 @@
-import re
+# all in lowercase, remove non-alphanum chars
+    # then should be a palindrome
+
+# given input string
+    # return bool if palindrome or not
+
+###########################################
+
+# first turn to lowercase
+# remove non-alphanum chars
+    # rebuild string w only alphanum chars
+# use two pointers starting at each end and move inwards
+    # if not equal
+        # return false
+# return true
+
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         s = s.lower()
-        i = 0
-        j = len(s) - 1
+        final_list = []
 
-        while i < j:
-            i_char = s[i]
-            j_char = s[j]
-            if i_char.isalnum():
-                if j_char.isalnum():
-                    if i_char == j_char:
-                        i += 1
-                        j -= 1
-                        pass
-                    else:
-                        return False
-                else:
-                    j -= 1
-            else:
-                i += 1
-        else:
-            return True
+        for i in s:
+            if i.isalnum():
+                final_list.append(i)
+        
+        f = ''.join(final_list)
+
+        left = 0
+        right = len(f)-1
+
+        while left < right:
+            if f[left] != f[right]:
+                return False
+            left += 1
+            right -= 1
+        
+        return True
