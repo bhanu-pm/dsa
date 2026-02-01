@@ -1,30 +1,81 @@
-from typing import List
+# values from 3 different indexes
+# sum of 3 values = 0, i+j+k=0, j+k=-i
+# how do I make sure the sol sets are different?????????????????????????????
+# maybe we can maintain a set of all sols
+    # and calc all possible sols
+# they are not asking for indexes, but only values,
+# so sorting is allowed
+
+# sort the input
+# for i
+    # init j=0, k=len(nums)-1
+    # while j<k
+        # standard two pointer sol
+        # with target sum (j+k) = -i
+        # if j or k = i
+            # skip, j+= 1 or k -= 1
+    # store all possible soln.s in set
+# turn set to list and return
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        output_set = set()
         nums.sort()
-        output = []
-        length = len(nums)
-
-        for idx, element in enumerate(nums):
-            if (idx > 0) and (element == nums[idx-1]):
+        done_i = set()
+        for i in range(len(nums)):
+            if nums[i] in done_i:
                 continue
-
-            i, j = idx + 1, length - 1
-            while i < j:
-                summ = element + nums[i] + nums[j]
-                if summ < 0:
-                    i += 1
-                elif summ > 0:
-                    j -= 1
+            target = -nums[i]
+            done_i.add(-target)
+            sol = tuple()
+            j=0
+            k=len(nums)-1
+            while j<k:
+                if j==i:
+                    j+=1
+                elif k==i:
+                    k-=1
                 else:
-                    output.append([element, nums[i], nums[j]])
-                    i += 1
-                    j -= 1
+                    if nums[j] + nums[k] < target:
+                        j+=1
+                    elif nums[j] + nums[k] > target:
+                        k-=1
+                    else:
+                        # looking at order cause, it would make it easy while the set eliminates duplicates
+                        if i < j:
+                            sol = (nums[i], nums[j], nums[k])
+                        elif j < i < k:
+                            sol = (nums[j], nums[i], nums[k])
+                        elif j < k < i:
+                            sol = (nums[j], nums[k], nums[i])
+                        output_set.add(sol)
+                        sol = tuple()
+                        j+=1
+                        k-=1
+        return list(output_set)
 
-                    while (i < j) and (nums[i] == nums[i-1]):
-                        i += 1
-                    while (i < j) and (nums[j] == nums[j+1]):
-                        j -= 1
-            
-        return output
+
+
+#####################################################################################################
+# alternate sol.
+# use the unsorted 2sum soln, using a hashmap
+# output_set
+# for i
+    # dict()
+    # target = -i
+    # for j
+        # if j in dict
+            # 
+        # new_target = target-j
+        # if new_target in dict:
+            # output_set.add([i, j, new_target])
+        # else:
+            # dict[new_target] = j
+    # return list(outputset)
+
+# class Solution:
+#     def threeSum(self, nums: List[int]) -> List[List[int]]:
+#         output_set = set()
+#         seen_i = set()
+#         for i in range(len(nums)):
+#             if i not in seen_i:
