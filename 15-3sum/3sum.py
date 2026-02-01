@@ -19,13 +19,12 @@
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        output_set = set()
+        output = set()
         nums.sort()
         for i, num in enumerate(nums):
             if i>0 and nums[i-1] == num:
                 continue
             target = -nums[i]
-            sol = tuple()
             j=i+1
             k=len(nums)-1
             while j<k:
@@ -34,12 +33,10 @@ class Solution:
                 elif nums[j] + nums[k] > target:
                     k-=1
                 else:
-                    sol = (nums[i], nums[j], nums[k])
-                    output_set.add(sol)
-                    sol = tuple()
+                    output.add((nums[i], nums[j], nums[k]))
                     j+=1
                     k-=1
-        return list(output_set)
+        return list(output)
 
 
 #####################################################################################################
