@@ -17,42 +17,42 @@
     # store all possible soln.s in set
 # turn set to list and return
 
-class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        output_set = set()
-        nums.sort()
-        done_i = set()
-        for i in range(len(nums)):
-            if nums[i] in done_i:
-                continue
-            target = -nums[i]
-            done_i.add(-target)
-            sol = tuple()
-            j=0
-            k=len(nums)-1
-            while j<k:
-                if j==i:
-                    j+=1
-                elif k==i:
-                    k-=1
-                else:
-                    if nums[j] + nums[k] < target:
-                        j+=1
-                    elif nums[j] + nums[k] > target:
-                        k-=1
-                    else:
-                        # looking at order cause, it would make it easy while the set eliminates duplicates
-                        if i < j:
-                            sol = (nums[i], nums[j], nums[k])
-                        elif j < i < k:
-                            sol = (nums[j], nums[i], nums[k])
-                        elif j < k < i:
-                            sol = (nums[j], nums[k], nums[i])
-                        output_set.add(sol)
-                        sol = tuple()
-                        j+=1
-                        k-=1
-        return list(output_set)
+# class Solution:
+#     def threeSum(self, nums: List[int]) -> List[List[int]]:
+#         output_set = set()
+#         nums.sort()
+#         done_i = set()
+#         for i in range(len(nums)):
+#             if nums[i] in done_i:
+#                 continue
+#             target = -nums[i]
+#             done_i.add(-target)
+#             sol = tuple()
+#             j=0
+#             k=len(nums)-1
+#             while j<k:
+#                 if j==i:
+#                     j+=1
+#                 elif k==i:
+#                     k-=1
+#                 else:
+#                     if nums[j] + nums[k] < target:
+#                         j+=1
+#                     elif nums[j] + nums[k] > target:
+#                         k-=1
+#                     else:
+#                         # looking at order cause, it would make it easy while the set eliminates duplicates
+#                         if i < j:
+#                             sol = (nums[i], nums[j], nums[k])
+#                         elif j < i < k:
+#                             sol = (nums[j], nums[i], nums[k])
+#                         elif j < k < i:
+#                             sol = (nums[j], nums[k], nums[i])
+#                         output_set.add(sol)
+#                         sol = tuple()
+#                         j+=1
+#                         k-=1
+#         return list(output_set)
 
 
 
@@ -73,9 +73,22 @@ class Solution:
             # dict[new_target] = j
     # return list(outputset)
 
-# class Solution:
-#     def threeSum(self, nums: List[int]) -> List[List[int]]:
-#         output_set = set()
-#         seen_i = set()
-#         for i in range(len(nums)):
-#             if i not in seen_i:
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        output_set = set()
+        seen_i = set()
+        for i in range(len(nums)):
+            if nums[i] not in seen_i:
+                target = -nums[i]
+                compl_set = set()
+
+                for j in range(i+1, len(nums)):
+                    # j+k=-i, k=-i-j
+                    complement = target-nums[j]
+                    if complement in compl_set:
+                        tup = [nums[i], nums[j], complement]
+                        tup.sort()
+                        output_set.add(tuple(tup))
+                    else:
+                        compl_set.add(nums[j])
+        return list(output_set)
