@@ -1,24 +1,24 @@
-# sorted in ascending order, input
-# find target int
-# if target:
+# input sorted array, ascending order
+# if target
     # return idx
 # else
     # return -1
 
-
-# we can use left and right pointers to indicate a sub arr/ range
-# left inclusive, right exclusive [left, right)
-# while sub list exist: (condition right-left>0)
-    # current idx = int(right+left/2)
-    # if i == target
+# O(logN)
+# left, right to maintain and denote the sub arrays
+# while loop
+    # calc idx
+        # idx = left+right//2
+    # if target = num[idx]
         # return idx
-    # elif target < i
-        # new sub list, to left,
-            # right = current idx, no need to change left
-    # else
-        # new sub list, to right
-            # left = current idx + 1, don't change right
-# return -1
+    
+    # if left == right
+        # return -1
+    
+    # if target < 
+        # right = idx
+    # elif target > 
+        # left = idx+1
 
 
 class Solution:
@@ -27,13 +27,12 @@ class Solution:
         right = len(nums)-1
 
         while True:
-            idx = int((right+left)/2)
-            if nums[idx] == target:
+            idx = (left+right)//2
+            if target == nums[idx]:
                 return idx
-            if right == left:
-                break
+            if left == right:
+                return -1
             if target < nums[idx]:
                 right = idx
             elif target > nums[idx]:
-                left = idx+1
-        return -1
+                left = idx + 1
