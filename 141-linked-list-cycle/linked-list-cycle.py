@@ -23,12 +23,11 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if not head:
             return False
-        left = head
         right = head.next
         while right:
-            if right.next == left or right == left:
+            if right.next == head or right == head:
                 return True
-            left = left.next
+            head = head.next
             right = right.next
             if right:
                 right = right.next
