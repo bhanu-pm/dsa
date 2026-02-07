@@ -24,6 +24,8 @@ class Solution:
         if not head:
             return False
         right = head.next
+        if right:
+            right = right.next
         while right:
             if right.next == head or right == head:
                 return True
