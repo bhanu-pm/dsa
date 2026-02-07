@@ -1,16 +1,16 @@
-# time complexity = O(N) obviously
-# in a loop go through each element
-
-# prev is previous node
-# node points to current node
-# temp = node.next
-# node.next = prev
-# if temp:
-    # prev = node
-    # node = temp
-# else:
-    # break
-
+# reverse
+# output a ll reversed
+# stored = None
+# while head
+    # if stored:
+        # temp = head.next
+        # head.next = stored
+    # else
+        # temp = head.next
+        # stored = head
+        # stored.next = None
+        # head = head.next
+# return head
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -19,17 +19,14 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return
-        prev = None
-
-        while True:
+        stored = None
+        while head:
             temp = head.next
-            head.next = prev
-            if temp:
-                prev = head
-                head = temp
+            if stored:
+                head.next = stored
+                stored = head
             else:
-                break
-        
-        return head
+                stored = head
+                stored.next = None
+            head = temp
+        return stored
