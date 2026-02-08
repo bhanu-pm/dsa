@@ -1,16 +1,26 @@
-# reverse
-# output a ll reversed
-# stored = None
-# while head
-    # if stored:
-        # temp = head.next
-        # head.next = stored
-    # else
-        # temp = head.next
-        # stored = head
-        # stored.next = None
+# head given
+# new = None
+# while head:
+    # if not new:
+        # new = head
         # head = head.next
-# return head
+        # new.next = None
+    # else:
+        # temp = head.next
+        # head.next = new
+        # new = head
+        # head = temp
+
+###############
+# new = head
+# head = head.next
+# new.next = None
+# while head:
+    # temp = head.next
+    # head.next = new
+    # new = head
+    # head = temp
+
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -19,14 +29,14 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        stored = None
+        if not head:
+            return head
+        new = head
+        head = head.next
+        new.next = None
         while head:
             temp = head.next
-            if stored:
-                head.next = stored
-                stored = head
-            else:
-                stored = head
-                stored.next = None
+            head.next = new
+            new = head
             head = temp
-        return stored
+        return new
