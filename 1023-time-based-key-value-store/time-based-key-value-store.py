@@ -2,6 +2,9 @@
     # will timeout
 
 # hashmap, key (string) -> value (ll in descending time,tuple of (timestamp, value)) HASHMAP LL SOLUTION
+    # works!!!!
+
+# hashmap, key (string) -> value (hashmap, key (timestamp int -> value (string))) HASHMAP ORDERED DICT SOLUTION
 
 # if no val at req time, return FIRST AVAILABLE previous timestamp value
 
@@ -21,37 +24,58 @@
     # else
         # create keu
 
-class Node:
-    def __init__(self, val=(0, 0), next_add=None):
-        self.val = val
-        self.next = next_add
+# class Node:
+#     def __init__(self, val=(0, 0), next_add=None):
+#         self.val = val
+#         self.next = next_add
 
+from collections import OrderedDict
 class TimeMap:
     def __init__(self):
         self.store = dict()
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        node = Node(val=(timestamp, value))
         if key not in self.store:
-            self.store[key] = node
-        else:
-            temp = self.store[key]
-            self.store[key] = node
-            node.next = temp
+            self.store[key] = OrderedDict()
+        self.store[key][timestamp] = value
+        self.store[key].move_to_end(timestamp, last=False)
         return
 
     def get(self, key: str, timestamp: int) -> str:
         if key not in self.store:
             return ""
-        ll = self.store[key]
-        i = timestamp
-        while ll and ll.val[0] > timestamp:
-            ll = ll.next
-        else:
-            if ll:
-                return ll.val[1]
-            else:
-                return ""
+        for i in self.store[key].keys():
+            if i <= timestamp:
+                return self.store[key][i]
+        return ""
+
+
+# class TimeMap:
+#     def __init__(self):
+#         self.store = dict()
+
+#     def set(self, key: str, value: str, timestamp: int) -> None:
+#         node = Node(val=(timestamp, value))
+#         if key not in self.store:
+#             self.store[key] = node
+#         else:
+#             temp = self.store[key]
+#             self.store[key] = node
+#             node.next = temp
+#         return
+
+#     def get(self, key: str, timestamp: int) -> str:
+#         if key not in self.store:
+#             return ""
+#         ll = self.store[key]
+#         i = timestamp
+#         while ll and ll.val[0] > timestamp:
+#             ll = ll.next
+#         else:
+#             if ll:
+#                 return ll.val[1]
+#             else:
+#                 return ""
 
 
 # Your TimeMap object will be instantiated and called as such:
