@@ -63,7 +63,7 @@ class Solution:
                 head = head.next
             i = i.next
             head.next = j
+            head = head.next
             if j:
                 j = j.next
-            head = head.next
         head = top
