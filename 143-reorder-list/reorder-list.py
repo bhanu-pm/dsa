@@ -37,7 +37,6 @@ class Solution:
                 fast = fast.next
             else:
                 break
-        # slow pointer now has the mid point
         # reverse the sll part that comes after slow
         head = slow.next
         slow.next = None
@@ -52,8 +51,6 @@ class Solution:
                 head.next = new
                 new = head
                 head = temp
-        # reversed the 2nd half
-        # i at start of 1st, j at the start of reversed
         # rearrange to form final order
         i = top
         j = new
