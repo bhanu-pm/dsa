@@ -1,0 +1,61 @@
+# given two 'non-empty' ll, with 'non-negative' integers
+# digits are stored in reverse order, so 125 becomes 5->2->1 (for ease of carry overs in addition)
+# carry overs go to add to 'next' node
+# return sum as a new linked list
+
+
+# carry = 0
+# node = None
+# while ll1 and ll2
+    # val = ll1.val + ll2.val + carry
+    # carry = 0
+    # if val>9:
+        # remainder = val%10
+        # carry = (val-remainder)/10
+    # if node is None:
+        # node = ListNode(remainder)
+    # else:
+        # temp = ListNode(remainder)
+        # node.next = temp
+        # node = node.next
+    # ll1 = ll1.next
+    # ll2 = ll2.next
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        carry = 0
+        node = None
+        head = None
+        val1 = 0
+        val2 = 0
+        while l1 or l2 or (carry>0):
+            if l1:
+                val1 = l1.val
+            if l2:
+                val2 = l2.val
+            val = val1 + val2 + carry
+            val1 = val2 = 0
+            carry = 0
+            if val>9:
+                remainder = val%10
+                carry = int((val-remainder)/10)
+            else:
+                remainder = val
+            if node is None:
+                node = ListNode(remainder)
+                head = node
+            else:
+                temp = ListNode(remainder)
+                node.next = temp
+                node = node.next
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        return head
