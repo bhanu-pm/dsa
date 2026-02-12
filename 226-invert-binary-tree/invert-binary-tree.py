@@ -1,3 +1,8 @@
+# given root
+# it would be straightforward to go depth wise
+# the call stack would take care of it
+
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,14 +11,14 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root is None:
+        if not root:
             return root
-        
-        if root.left is not None:
+            
+        if root.left:
             self.invertTree(root.left)
-        if root.right is not None:
+        if root.right:
             self.invertTree(root.right)
-
+        
         root.left, root.right = root.right, root.left
         return root
         
