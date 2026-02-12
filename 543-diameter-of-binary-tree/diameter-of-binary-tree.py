@@ -13,12 +13,10 @@ class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         self.depth(root)
         return self.maxd
-    
     def depth(self, root):
         if not root:
             return 0
         left = self.depth(root.left)
         right = self.depth(root.right)
-        result = max(left, right)
-        self.maxd = max(self.maxd, result, left+right)
-        return 1+result
+        self.maxd = max(self.maxd, left+right)
+        return 1+max(left, right)
