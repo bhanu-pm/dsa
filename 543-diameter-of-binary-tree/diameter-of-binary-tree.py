@@ -16,6 +16,8 @@ class Solution:
     def depth(self, root):
         if not root:
             return 0
+        if not root.left and not root.right:
+            return 1
         left = self.depth(root.left)
         right = self.depth(root.right)
         self.maxd = max(self.maxd, left+right)
