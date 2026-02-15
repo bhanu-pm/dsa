@@ -19,42 +19,67 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
+# from collections import deque
+# class Solution:
+    # def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    #     if subRoot is None:
+    #         return True
+    #     if root is None:
+    #         return False
+    #     stack = deque()
+    #     stack.append(root)
+    #     while stack:
+    #         root = stack.pop()
+    #         if root is None:
+    #             continue
+    #         if root.val == subRoot.val:
+    #             if self.sameTree(root, subRoot):
+    #                 return True
+    #         stack.append(root.right)
+    #         stack.append(root.left)
+    #     return False
+
+    # def sameTree(self, p, q):
+    #     stackp = deque()
+    #     stackq = deque()
+    #     stackp.append(p)
+    #     stackq.append(q)
+    #     while stackp and stackq:
+    #         p = stackp.pop()
+    #         q = stackq.pop()
+    #         if p is None and q is None:
+    #             continue
+    #         if p is None or q is None:
+    #             return False
+    #         if p.val != q.val:
+    #             return False
+    #         stackp.append(p.right)
+    #         stackq.append(q.right)
+    #         stackp.append(p.left)
+    #         stackq.append(q.left)
+    #     return True
+
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         if subRoot is None:
             return True
         if root is None:
             return False
-        stack = deque()
-        stack.append(root)
-        while stack:
-            root = stack.pop()
-            if root is None:
-                continue
-            if root.val == subRoot.val:
-                if self.sameTree(root, subRoot):
-                    return True
-            stack.append(root.right)
-            stack.append(root.left)
+        if root.val == subRoot.val:
+            if self.sametree(root, subRoot):
+                return True
+        if self.isSubtree(root.left, subRoot):
+            return True
+        if self.isSubtree(root.right, subRoot):
+            return True
         return False
 
-    def sameTree(self, p, q):
-        stackp = deque()
-        stackq = deque()
-        stackp.append(p)
-        stackq.append(q)
-        while stackp and stackq:
-            p = stackp.pop()
-            q = stackq.pop()
-            if p is None and q is None:
-                continue
-            if p is None or q is None:
-                return False
-            if p.val != q.val:
-                return False
-            stackp.append(p.right)
-            stackq.append(q.right)
-            stackp.append(p.left)
-            stackq.append(q.left)
-        return True
+    def sametree(self, p, q):
+        if p is None and q is None:
+            return True
+        if p is None or q is None:
+            return False
+        if p.val == q.val:
+            if self.sametree(p.left, q.left) and self.sametree(p.right, q.right):
+                return True
+        return False
