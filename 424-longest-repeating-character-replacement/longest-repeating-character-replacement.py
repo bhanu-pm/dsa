@@ -25,12 +25,14 @@ class Solution:
         l = len(s)
         if k > l:
             return l
-        alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        count = {key:0 for key in alph}
+        count = dict()
         max_len = 0
         i = 0
         for j in range(l):
-            count[s[j]] += 1
+            if s[j] in count:
+                count[s[j]] += 1
+            else:
+                count[s[j]] = 1
             while (j-i+1) - max(count.values()) > k:
                 count[s[i]] -= 1
                 i+=1
