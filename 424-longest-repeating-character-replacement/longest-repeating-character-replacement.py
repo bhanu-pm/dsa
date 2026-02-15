@@ -1,39 +1,40 @@
-# 26 possible english uppercase characters
-# no. of switches <= k
-# need the longest valid substring's length
-# what is valid? -> substring length - most occurences of single character <= k
+# given s string and k int
+# k replacements possible
+# validity checking should take only O(1)
+# return length of longest possible substring with k replacements
+# dynamic sliding window
 
-# dynamic subwindow
-# need a dict of 26 Uppercase english letters, to track counts, count
-# track max_len
-
-# for right loop
-    # count[right] +1
-
-    # while substr len - max_count > k: (non-validity condition)
-        # count[left] -1
-        # left += 1
-    
-    # max_len = max (maxlen, current len)
+# count = dict()
+# max_len = -1
+# i=0, j=1
+# for j in range(len(s))
+    # add j to count
+    # while invalid????????:
+        # shrink
+        # decrease i's count from count dict
+        # move i to right
+    # max_len = max(max_len, j-i)
 # return max_len
 
-# time complex, O(26*N), 26 to find max_count in the count dict
-# O(1) space complexity, cause count dict fixed size, other variables
+# invalid condition 
+    # lenofSubstring - max(count.values) <= k for validity
+    # lenSS - max(count.values) > k for invalidity condition
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        max_len = float('-inf')
-        alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        count = {key:0 for key in alph}
-        left = 0
-
-        for right in range(len(s)):
-            count[s[right]] += 1
-
-            while (right-left+1 - max(count.values())) > k:
-                count[s[left]] -= 1
-                left += 1
-            
-            max_len = max(max_len, right-left+1)
-        
+        l = len(s)
+        if k > l:
+            return l
+        count = dict()
+        max_len = 0
+        i = 0
+        for j in range(l):
+            if s[j] in count:
+                count[s[j]] += 1
+            else:
+                count[s[j]] = 1
+            while (j-i+1) - max(count.values()) > k:
+                count[s[i]] -= 1
+                i+=1
+            max_len = max(max_len, j-i+1)
         return max_len
