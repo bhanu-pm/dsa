@@ -42,8 +42,5 @@ class Solution:
         if root.left:
             self.store(root.left)
         self.elements.append(root.val)
-        
-        if root.right is None:
-            return
-        else:
+        if root.right:
             self.store(root.right)
