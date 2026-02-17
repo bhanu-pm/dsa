@@ -19,12 +19,12 @@ class Solution:
         output = []
         current_level = 0
         group = []
-        
+
         while queue:
             root, level = queue.popleft()
             if level == current_level:
                 group.append(root.val)
-            if level > current_level:
+            elif level > current_level:
                 current_level += 1
                 output.append(group)
                 group = []
