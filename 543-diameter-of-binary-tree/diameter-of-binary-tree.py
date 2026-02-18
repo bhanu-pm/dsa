@@ -1,4 +1,7 @@
-# diameter is the longest path in the tree (even child nodes can be the starting & ending points)
+# diam is length of longest path btw any 2 nodes
+
+# depth of that subtree should be returned above
+# longest path, depth of left subtree + depth of right subtree
 
 
 # Definition for a binary tree node.
@@ -9,16 +12,28 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        self.maxd = 0
+        self.longest = 0
+
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        if not root.left and not root.right:
+            return 0
+
         self.depth(root)
-        return self.maxd
+
+        return self.longest
+    
     def depth(self, root):
         if not root:
             return 0
+        
         if not root.left and not root.right:
             return 1
+
         left = self.depth(root.left)
         right = self.depth(root.right)
-        self.maxd = max(self.maxd, left+right)
+        self.longest = max(self.longest, left+right)
+        
         return 1+max(left, right)
