@@ -14,6 +14,10 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.preorder = []
+        self.inorder = []
+
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         if not preorder or not inorder:
             return
