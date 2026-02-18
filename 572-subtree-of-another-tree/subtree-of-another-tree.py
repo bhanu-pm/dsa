@@ -1,16 +1,10 @@
-# root and subroot given
+# given two roots
+# if subroot is subtree of root
+    # return true
+# else return false
+# a tree could be a subtree of itself too
 
-# naive solution
-# if node.val == subroot.val
-    # if node.left.val == subroot.left.val
-        # if node.right.val == subroot.right.val
-            # if node.left.left is None and node.left.right is None and node.right.left is None and node.right.right is None:
-                # true
-# else
-    # continue
-
-# if node.val == subroot.val
-    # 
+# for each root node, check if its same as subroot
 
 
 # Definition for a binary tree node.
@@ -19,67 +13,27 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-# from collections import deque
-# class Solution:
-    # def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-    #     if subRoot is None:
-    #         return True
-    #     if root is None:
-    #         return False
-    #     stack = deque()
-    #     stack.append(root)
-    #     while stack:
-    #         root = stack.pop()
-    #         if root is None:
-    #             continue
-    #         if root.val == subRoot.val:
-    #             if self.sameTree(root, subRoot):
-    #                 return True
-    #         stack.append(root.right)
-    #         stack.append(root.left)
-    #     return False
-
-    # def sameTree(self, p, q):
-    #     stackp = deque()
-    #     stackq = deque()
-    #     stackp.append(p)
-    #     stackq.append(q)
-    #     while stackp and stackq:
-    #         p = stackp.pop()
-    #         q = stackq.pop()
-    #         if p is None and q is None:
-    #             continue
-    #         if p is None or q is None:
-    #             return False
-    #         if p.val != q.val:
-    #             return False
-    #         stackp.append(p.right)
-    #         stackq.append(q.right)
-    #         stackp.append(p.left)
-    #         stackq.append(q.left)
-    #     return True
-
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if subRoot is None:
+        if not subRoot:
             return True
-        if root is None:
+        if not root:
             return False
+
         if root.val == subRoot.val:
-            if self.sametree(root, subRoot):
+            if self.sametree(root.left, subRoot.left) and self.sametree(root.right, subRoot.right):
                 return True
-        if self.isSubtree(root.left, subRoot):
-            return True
-        if self.isSubtree(root.right, subRoot):
+        if self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot):
             return True
         return False
-
-    def sametree(self, p, q):
-        if p is None and q is None:
+    
+    def sametree(self, root, subroot):
+        if not subroot and not root:
             return True
-        if p is None or q is None:
+        if not root or not subroot:
             return False
-        if p.val == q.val:
-            if self.sametree(p.left, q.left) and self.sametree(p.right, q.right):
+        
+        if root.val == subroot.val:
+            if self.sametree(root.left, subroot.left) and self.sametree(root.right, subroot.right):
                 return True
         return False
