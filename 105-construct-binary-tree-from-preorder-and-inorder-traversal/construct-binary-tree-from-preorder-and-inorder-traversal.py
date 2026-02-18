@@ -24,18 +24,16 @@ class Solution:
             return
         self.preorder = preorder
         self.inorder = inorder
-        n = len(preorder)
         for idx, num in enumerate(inorder):
             self.indict[num] = idx
-        root = self.tree(0, n, 0, n)
+        root = self.tree(0, idx+1, 0, idx+1)
         return root
 
     def tree(self, pleft, pright, ileft, iright):
         if not self.preorder[pleft:pright] or not self.inorder[ileft:iright]:
             return
         root = TreeNode(self.preorder[pleft])
-        relative = self.indict[self.inorder[ileft]]
-        mid = self.indict[self.preorder[pleft]] - relative
+        mid = self.indict[self.preorder[pleft]] - self.indict[self.inorder[ileft]]
         root.left = self.tree(pleft+1, pleft+mid+1, ileft, ileft+mid)
         root.right = self.tree(pleft+mid+1, pright, ileft+mid+1, iright)
         return root
