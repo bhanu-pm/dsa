@@ -22,16 +22,20 @@ class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         if not preorder or not inorder:
             return
+        self.preorder = preorder
+        self.inorder = inorder
+        n = len(preorder)
         for idx, num in enumerate(inorder):
             self.indict[num] = idx
-        root = self.tree(preorder, inorder)
+        root = self.tree(0, n, 0, n)
         return root
 
-    def tree(self, preorder, inorder):
-        if not preorder or not inorder:
+    def tree(self, pleft, pright, ileft, iright):
+        if not self.preorder[pleft:pright] or not self.inorder[ileft:iright]:
             return
-        root = TreeNode(preorder[0])
-        mid = self.indict[preorder[0]] - self.indict[inorder[0]]
-        root.left = self.tree(preorder[1:mid+1], inorder[:mid])
-        root.right = self.tree(preorder[mid+1:], inorder[mid+1:])
+        root = TreeNode(self.preorder[pleft])
+        relative = self.indict[self.inorder[ileft]]
+        mid = self.indict[self.preorder[pleft]] - relative
+        root.left = self.tree(pleft+1, pleft+mid+1, ileft, ileft+mid)
+        root.right = self.tree(pleft+mid+1, pright, ileft+mid+1, iright)
         return root
