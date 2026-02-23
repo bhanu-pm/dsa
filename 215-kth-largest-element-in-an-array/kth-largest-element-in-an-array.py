@@ -15,3 +15,4 @@ class Solution:
         while len(popped) < k-1:
             popped.append(heapq.heappop_max(nums))
         return heapq.heappop_max(nums)
+        
