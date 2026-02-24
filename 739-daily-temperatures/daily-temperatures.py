@@ -15,10 +15,9 @@
         # j-i and store it in i'th index
 # return answer
 
-from collections import deque
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        stack = deque()
+        stack = []
         answer = [0] * len(temperatures)
         for j, temperature in enumerate(temperatures):
             while stack and stack[-1][1] < temperature:
