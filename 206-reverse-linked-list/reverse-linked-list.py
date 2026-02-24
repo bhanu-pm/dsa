@@ -1,25 +1,12 @@
-# head given
-# new = None
-# while head:
-    # if not new:
-        # new = head
-        # head = head.next
-        # new.next = None
-    # else:
-        # temp = head.next
-        # head.next = new
-        # new = head
-        # head = temp
+# inplace reversal
 
-###############
-# new = head
-# head = head.next
-# new.next = None
-# while head:
-    # temp = head.next
-    # head.next = new
-    # new = head
-    # head = temp
+# traverse the head, through the ll
+# while head.next
+    # store head.next
+    # reverse head to point to previous
+    # current node is now the new previous
+    # new head is stored head.next
+# return prev
 
 
 # Definition for singly-linked list.
@@ -29,14 +16,10 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return head
-        new = head
-        head = head.next
-        new.next = None
+        prev = None
         while head:
             temp = head.next
-            head.next = new
-            new = head
+            head.next = prev
+            prev = head
             head = temp
-        return new
+        return prev
