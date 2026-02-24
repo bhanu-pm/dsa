@@ -20,9 +20,9 @@ class Solution:
         stack = []
         answer = [0] * len(temperatures)
         for j, temperature in enumerate(temperatures):
-            while stack and stack[-1][1] < temperature:
-                i, s_temperature = stack.pop()
+            while stack and temperatures[stack[-1]] < temperature:
+                i = stack.pop()
                 answer[i] = j-i
 
-            stack.append((j, temperature))
+            stack.append(j)
         return answer
