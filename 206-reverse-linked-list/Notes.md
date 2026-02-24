@@ -1,1 +1,1 @@
-<h2>reverse-linked-list Notes</h2><hr>[ Time taken: 8 m 33 s ]
+<h2>reverse-linked-list Notes</h2><hr>[ Time taken: 5 m 19 s ]
