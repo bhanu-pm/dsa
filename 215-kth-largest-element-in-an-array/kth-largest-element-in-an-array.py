@@ -11,7 +11,6 @@
 # kth largest, so in a min heap of size k, it would be the top
 
 
-
 import heapq
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
