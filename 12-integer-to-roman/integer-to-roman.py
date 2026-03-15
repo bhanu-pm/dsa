@@ -20,78 +20,11 @@
 class Solution:
     def intToRoman(self, num: int) -> str:
         result = []
-        special = {5:'V', 10:'X', 50:'L', 100:'C', 500:'D', 1000:'M'}
-        while num > 0:
-            if num < 4:
-                result.append('I')
-                num -= 1
-            elif num == 4:
-                result.append('I')
-                num += 1
-            elif num == 5:
-                result.append('V')
-                num = 0
-            elif num < 9:
-                result.append('V')
-                num -= 5
-            elif num == 9:
-                result.append('I')
-                num += 1
-            elif num == 10:
-                result.append('X')
-                num = 0
-            elif num < 40:
-                result.append('X')
-                num -= 10
-            elif num == 40:
-                result.append('X')
-                num += 10
-            elif num < 50:
-                result.append('X')
-                num += 10
-            elif num == 50:
-                result.append('L')
-                num = 0
-            elif num < 90:
-                result.append('L')
-                num -= 50
-            elif num == 90:
-                result.append('X')
-                num += 10
-            elif num < 100:
-                result.append('X')
-                num += 10
-            elif num == 100:
-                result.append('C')
-                num = 0
-            elif num < 400:
-                result.append('C')
-                num -= 100
-            elif num == 400:
-                result.append('C')
-                num += 100
-            elif num < 500:
-                result.append('C')
-                num += 100
-            elif num == 500:
-                result.append('D')
-                num = 0
-            elif num < 900:
-                result.append('D')
-                num -= 500
-            elif num == 900:
-                result.append('C')
-                num += 100
-            elif num < 1000:
-                result.append('C')
-                num += 100
-            elif num == 1000:
-                result.append('M')
-                num = 0
-            elif num < 4000:
-                result.append('M')
-                num -= 1000
-            else:
-                break
+        int_roman = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]
+
+        for i in int_roman:
+            while num >= i[0]:
+                result.append(i[1])
+                num -= i[0]
         
         return ''.join(result)
